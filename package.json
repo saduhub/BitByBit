@@ -1,0 +1,11 @@
+{
+  "name": "bitbybit",
+  "version": "1.0.0",
+  "description": "A habit tracking app. Accomplish all of your goals bit by bit!",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Jorge Duarte",
+  "license": "ISC"
+}
