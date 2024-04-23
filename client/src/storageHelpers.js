@@ -12,3 +12,17 @@ export const getLocalStorageValue = (key, defaultValue) => {
 export const setLocalStorage = (key, value) => {
     localStorage.setItem(key, String(value));
 };
+
+export const testEndPoint = async () => {
+    try {
+        const response = await fetch(''); 
+        if (response.ok) {
+            const data = await response.json();
+            console.log("Data received from server:", data);
+        } else {
+            console.error("Failed to fetch data from server:", response.status);
+        }
+    } catch (error) {
+        console.error("Error fetching data from server:", error);
+    }
+};

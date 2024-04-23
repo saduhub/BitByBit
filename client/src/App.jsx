@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import RadioButtonGroup from './components/RadioButtonGroup';
-import { getLocalStorageValue, setLocalStorage } from './storageHelpers';
+import { getLocalStorageValue, setLocalStorage, testEndPoint } from './storageHelpers';
 import questions from './questions';
 
 function App() {
@@ -26,10 +26,16 @@ function App() {
       }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    testEndPoint();
+    console.log(responses);
+  };
+
   return (
       <>
           <div>
-              <form onSubmit={e => { e.preventDefault(); console.log(responses); }}>
+              <form onSubmit={handleSubmit}>
                   <h3>Survey Questions</h3>
                   {questions.map(question => (
                       <RadioButtonGroup
