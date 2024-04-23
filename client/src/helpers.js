@@ -13,16 +13,36 @@ export const setLocalStorage = (key, value) => {
     localStorage.setItem(key, String(value));
 };
 
-export const testEndPoint = async () => {
+export const getHabitData = async () => {
     try {
         const response = await fetch('/api'); 
         if (response.ok) {
             const data = await response.json();
-            console.log("Data received from server:", data);
+            console.log("Data received from my server:", data);
         } else {
-            console.error("Failed to fetch data from server:", response.status);
+            console.error("Failed to fetch data from my server:", response.status);
         }
     } catch (error) {
-        console.error("Error fetching data from server:", error);
+        console.error("Error fetching data from my server:", error);
+    }
+};
+
+export const storeFormData = async (data) => {
+    try {
+        const response = await fetch('/api', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        if (response.ok) {
+            const result = await response.json();
+            console.log("Data saved to Pantry:", result);
+        } else {
+            console.error("Failed to save data:", response.statusText);
+        }
+    } catch (error) {
+        console.error("Error while saving data:", error);
     }
 };

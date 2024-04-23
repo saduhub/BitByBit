@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import RadioButtonGroup from './components/RadioButtonGroup';
-import { getLocalStorageValue, setLocalStorage, testEndPoint } from './helpers';
+import { getLocalStorageValue, setLocalStorage, getHabitData, storeFormData } from './helpers';
 import questions from './questions';
 
 function App() {
@@ -14,6 +14,7 @@ function App() {
 
   useEffect(() => {
       Object.keys(responses).forEach(key => setLocalStorage(key, String(responses[key])));
+      getHabitData();
   }, [responses]);
 
   console.log(responses);
@@ -26,11 +27,10 @@ function App() {
       }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    testEndPoint();
-    console.log(responses);
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await storeFormData(responses);
+    };
 
   return (
       <>
