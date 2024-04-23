@@ -17,7 +17,7 @@ function App() {
       getHabitData();
   }, [responses]);
 
-  console.log(responses);
+//   console.log(responses);
 
   const handleChange = (e) => {
       const { name, value } = e.target;

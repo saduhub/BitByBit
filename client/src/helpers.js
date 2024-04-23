@@ -18,12 +18,12 @@ export const getHabitData = async () => {
         const response = await fetch('/api'); 
         if (response.ok) {
             const data = await response.json();
-            console.log("Data received from my server:", data);
+            console.log("Data received from my server after Pantry query:", data);
         } else {
-            console.error("Failed to fetch data from my server:", response.status);
+            console.error("Failed to fetch data from my server after Pantry query:", response.status);
         }
     } catch (error) {
-        console.error("Error fetching data from my server:", error);
+        console.error("Error fetching data from my server after Pantry query:", error);
     }
 };
 
