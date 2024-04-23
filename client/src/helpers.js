@@ -15,7 +15,7 @@ export const setLocalStorage = (key, value) => {
 
 export const testEndPoint = async () => {
     try {
-        const response = await fetch(''); 
+        const response = await fetch('/api'); 
         if (response.ok) {
             const data = await response.json();
             console.log("Data received from server:", data);

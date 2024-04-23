@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', async (req, res) => {
+app.get('/api', async (req, res) => {
     try {
         const testResponse = { message: "Working" };
         console.log(testResponse);

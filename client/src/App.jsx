@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import RadioButtonGroup from './components/RadioButtonGroup';
-import { getLocalStorageValue, setLocalStorage, testEndPoint } from './storageHelpers';
+import { getLocalStorageValue, setLocalStorage, testEndPoint } from './helpers';
 import questions from './questions';
 
 function App() {
