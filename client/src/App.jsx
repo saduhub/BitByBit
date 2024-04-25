@@ -59,11 +59,26 @@ function App() {
     const renderPastData = () => {
         // Sort dates in descending order
         const sortedDates = Object.keys(pastData).sort((a, b) => new Date(b) - new Date(a));
-        return sortedDates.map(date => (
-            <div key={date} className='text-center'>
-                <strong>{date}</strong>: {JSON.stringify(pastData[date])}
+        return (
+            <div className="row justify-content-center"> 
+                {sortedDates.map(date => (
+                    <div key={date} className="col-8 col-sm-6 col-md-4 col-lg-3 mb-3">
+                        <div className="card h-100">
+                            <div className="card-header text-center">
+                                <strong>Date: {date}</strong>
+                            </div>
+                            <div className="card-body text-center">
+                                {Object.entries(pastData[date]).map(([task, status]) => (
+                                    <p className="card-text" key={task}>
+                                        <strong>{task.replace(/([A-Z])/g, ' $1').trim()}:</strong> {status.toString()}
+                                    </p>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                ))}
             </div>
-        ));
+        );
     };
     
 
