@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import './App.css';
+// import './App.css';
 import RadioButtonGroup from './components/RadioButtonGroup';
-import { getLocalStorageValue, setLocalStorage, getHabitData, storeFormData, getTodayData, getPastData, getDate } from './helpers';
+import { getLocalStorageValue, getHabitData, storeFormData, getTodayData, getPastData, getDate } from './helpers';
 import questions from './questions';
 
 function App() {
@@ -12,6 +12,7 @@ function App() {
         pwDaily: getLocalStorageValue('pwDaily', 'N/A')
     });
     // Data from Pantry saved to states below.
+    // eslint-disable-next-line
     const [todayData, setTodayData] = useState({});
     const [pastData, setPastData] = useState({});
     // Determine date
@@ -59,7 +60,7 @@ function App() {
         // Sort dates in descending order
         const sortedDates = Object.keys(pastData).sort((a, b) => new Date(b) - new Date(a));
         return sortedDates.map(date => (
-            <div key={date}>
+            <div key={date} className='text-center'>
                 <strong>{date}</strong>: {JSON.stringify(pastData[date])}
             </div>
         ));
@@ -67,29 +68,34 @@ function App() {
     
 
   return (
-      <>
-          <div>
-              <form onSubmit={handleSubmit}>
-                  <h3>Survey Questions {today}</h3>
-                  {questions.map(question => (
-                      <RadioButtonGroup
-                          key={question.name}
-                          label={question.label}
-                          name={question.name}
-                          options={question.options}
-                          value={responses[question.name]}
-                        //   value={todayData[question.name] || 'N/A'}
-                          onChange={handleChange}
-                      />
-                  ))}
-                  <button type="submit">Submit</button>
-              </form>
+      <div className="container my-5">
+          <div className="row justify-content-center">
+            <div className="col-md-8">
+                <form onSubmit={handleSubmit} className="mb-4">
+                    <h3 className="mb-3 text-center">Bits for {today}</h3>
+                    {questions.map(question => (
+                        <RadioButtonGroup
+                            key={question.name}
+                            label={question.label}
+                            name={question.name}
+                            options={question.options}
+                            value={responses[question.name]}
+                            onChange={handleChange}
+                        />
+                    ))}
+                    <div className="d-flex justify-content-center">
+                        <button type="submit" className="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
           </div>
-          <div>
-              <h3>Previous Days</h3>
-              <div>{renderPastData()}</div>
+          <div className="row">
+            <div className="col-12">
+                <h3 className="mb-3 text-center">Previous Bits</h3>
+                <div>{renderPastData()}</div>
+            </div>
           </div>
-      </>
+      </div>
   );
 }
 

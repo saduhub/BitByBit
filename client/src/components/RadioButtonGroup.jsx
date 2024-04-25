@@ -2,7 +2,7 @@
 function RadioButtonGroup({ label, name, options, value, onChange }) {
     const stringValue = String(value);  
     return (
-        <div>
+        <div className="mb-3 text-center">
             <label>{label}</label>
             {/* eslint-disable-next-line */}
             {options.map(option => (
