@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 export const getLocalStorageValue = (key, defaultValue) => {
     const storedValue = localStorage.getItem(key);
     if (storedValue === "true") {
@@ -29,13 +31,11 @@ export const getHabitData = async () => {
 };
 
 export const getDate = () => {
-    const today = new Date().toISOString().slice(0, 10);
-    // console.log(today)
-    return today;
+    return dayjs().format('YYYY-MM-DD');
 };
 
 export const getTodayData = (allData) => {
-    const today = new Date().toISOString().slice(0, 10);
+    const today = dayjs().format('YYYY-MM-DD');
     // console.log("Today's date:", today); 
     // console.log("All data keys:", Object.keys(allData));
     // console.log(today)
@@ -44,7 +44,7 @@ export const getTodayData = (allData) => {
 };
 
 export const getPastData = (allData) => {
-    const today = new Date().toISOString().slice(0, 10);
+    const today = dayjs().format('YYYY-MM-DD');
     const pastData = {...allData};
     delete pastData[today];
     // console.log("Past data keys after deletion:", Object.keys(pastData)); 

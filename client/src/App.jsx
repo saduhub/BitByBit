@@ -49,12 +49,12 @@ function App() {
             [name]: value === "true" ? true : (value === "false" ? false : "N/A")
         }));
     };
-
+    // Allow user to submit today's data to db.
     const handleSubmit = async (e) => {
         e.preventDefault();
         // await storeFormData(responses);
     };
-    
+    // Display past data for the user.
     const renderPastData = () => {
         // Sort dates in descending order
         const sortedDates = Object.keys(pastData).sort((a, b) => new Date(b) - new Date(a));
