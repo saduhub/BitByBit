@@ -5,10 +5,24 @@ import { getLocalStorageValue, setLocalStorage, getHabitData, storeFormData, get
 import questions from './questions';
 
 function App() {
+    // Form persistence behavior - local storage save data retrieval for radio button checked behavior.
+    const [responses, setResponses] = useState({
+        countCalories: getLocalStorageValue('countCalories', 'N/A'), 
+        shower: getLocalStorageValue('shower', 'N/A'),
+        pwDaily: getLocalStorageValue('pwDaily', 'N/A')
+    });
+    // Data from Pantry saved to states below.
     const [todayData, setTodayData] = useState({});
     const [pastData, setPastData] = useState({});
+    // Determine date
     const today = getDate()
-
+    // Form persistence behavior - Update local storage when selecting another option.
+    useEffect(() => {
+        for (const key in responses) {
+          localStorage.setItem(key, String(responses[key]));
+        }
+    }, [responses]);
+    // On load, fetch and set today's data as well as past data to corresponding states.
     useEffect(() => {
         async function fetchData() {
             const allData = await getHabitData();
@@ -23,20 +37,27 @@ function App() {
         fetchData();
     }, []);
 
+    // Testing response updating
+    useEffect(() => {
+        console.log('Updated responses:', responses);
+    }, [responses]);
+    // Attach event listeners to radio buttons. These trigger response update.
     const handleChange = (e) => {
         const { name, value } = e.target;
-        console.log(name);
-        console.log(value);
-
+        setResponses(prevResponses => ({
+            ...prevResponses,
+            [name]: value === "true" ? true : (value === "false" ? false : "N/A")
+        }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         // await storeFormData(responses);
     };
-
+    
     const renderPastData = () => {
-        const sortedDates = Object.keys(pastData).sort((a, b) => new Date(b) - new Date(a)); // Sort dates in descending order
+        // Sort dates in descending order
+        const sortedDates = Object.keys(pastData).sort((a, b) => new Date(b) - new Date(a));
         return sortedDates.map(date => (
             <div key={date}>
                 <strong>{date}</strong>: {JSON.stringify(pastData[date])}
@@ -56,8 +77,8 @@ function App() {
                           label={question.label}
                           name={question.name}
                           options={question.options}
-                        //   value={responses[question.name]}
-                          value={todayData[question.name] || 'N/A'}
+                          value={responses[question.name]}
+                        //   value={todayData[question.name] || 'N/A'}
                           onChange={handleChange}
                       />
                   ))}
