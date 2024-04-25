@@ -5,19 +5,6 @@ import { getLocalStorageValue, setLocalStorage, getHabitData, storeFormData, get
 import questions from './questions';
 
 function App() {
-//   const initialResponses = questions.reduce((acc, question) => ({
-//       ...acc,
-//       [question.name]: getLocalStorageValue(question.name, 'N/A')
-//   }), {});
-
-//   const [responses, setResponses] = useState(initialResponses);
-
-//   useEffect(() => {
-//       Object.keys(responses).forEach(key => setLocalStorage(key, String(responses[key])));
-//       getHabitData();
-//   }, [responses]);
-
-//   console.log(responses);
     const [todayData, setTodayData] = useState({});
     const [pastData, setPastData] = useState({});
     const today = getDate()
@@ -29,37 +16,34 @@ function App() {
             if (allData) {
                 setTodayData(getTodayData(allData));
                 setPastData(getPastData(allData));
-                console.log(todayData);
-                console.log(pastData);
+                // console.log(todayData);
+                // console.log(pastData);
             }
         }
         fetchData();
     }, []);
 
-    useEffect(() => {
-        console.log('Updated Today Data:', todayData);
-        console.log('Updated Past Data:', pastData);
-    }, [todayData, pastData]);
-
-//   const handleChange = (e) => {
-//       const { name, value } = e.target;
-//       setResponses(prevResponses => ({
-//           ...prevResponses,
-//           [name]: value === "true" ? true : (value === "false" ? false : value)
-//       }));
-//   };
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setTodayData(prevData => ({
-            ...prevData,
-            [name]: value === "true" ? true : (value === "false" ? false : value)
-        }));
+        console.log(name);
+        console.log(value);
+
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         // await storeFormData(responses);
     };
+
+    const renderPastData = () => {
+        const sortedDates = Object.keys(pastData).sort((a, b) => new Date(b) - new Date(a)); // Sort dates in descending order
+        return sortedDates.map(date => (
+            <div key={date}>
+                <strong>{date}</strong>: {JSON.stringify(pastData[date])}
+            </div>
+        ));
+    };
+    
 
   return (
       <>
@@ -82,7 +66,7 @@ function App() {
           </div>
           <div>
               <h3>Previous Days</h3>
-              <p>{}</p>
+              <div>{renderPastData()}</div>
           </div>
       </>
   );

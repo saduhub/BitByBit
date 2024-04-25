@@ -39,7 +39,7 @@ export const getTodayData = (allData) => {
     // console.log("Today's date:", today); 
     // console.log("All data keys:", Object.keys(allData));
     // console.log(today)
-    console.log(allData[today])
+    // console.log(allData[today])
     return allData[today] || {};
 };
 
