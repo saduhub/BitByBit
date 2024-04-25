@@ -52,14 +52,19 @@ export const getPastData = (allData) => {
     return pastData;
 };
 
-export const storeFormData = async (data) => {
+export const storeFormData = async (newResponses, today, pastData) => {
+    const dataPayload = {
+        ...pastData, 
+        [today]: newResponses 
+    };
+    console.log(dataPayload)
     try {
         const response = await fetch('/api', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(dataPayload)
         });
         if (response.ok) {
             const result = await response.json();

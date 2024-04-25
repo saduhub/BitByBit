@@ -52,7 +52,7 @@ function App() {
     // Allow user to submit today's data to db.
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // await storeFormData(responses);
+        await storeFormData(responses, today, pastData);
     };
     // Display past data for the user.
     const renderPastData = () => {
