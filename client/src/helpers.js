@@ -76,3 +76,20 @@ export const storeFormData = async (newResponses, today, pastData) => {
         console.error("Error while saving data:", error);
     }
 };
+
+export const queryOpenAI = async (prompt) => {
+    const response = await fetch('/openai', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt })
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        return data;
+    } else {
+        throw new Error("Failed to get response from OpenAI");
+    }
+};
