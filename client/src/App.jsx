@@ -2,14 +2,47 @@ import { useState, useEffect } from 'react';
 // import './App.css';
 import RadioButtonGroup from './components/RadioButtonGroup';
 import { getLocalStorageValue, getHabitData, storeFormData, getTodayData, getPastData, getDate } from './helpers';
-import questions from './questions';
+import questions from './ask';
 
 function App() {
     // Form persistence behavior - local storage save data retrieval for radio button checked behavior.
     const [responses, setResponses] = useState({
-        countCalories: getLocalStorageValue('countCalories', 'N/A'), 
+        countCaloriesBreakfast: getLocalStorageValue('countCaloriesBreakfast', 'N/A'), 
+        countCaloriesLunch: getLocalStorageValue('countCaloriesLunch', 'N/A'), 
+        countCaloriesDinner: getLocalStorageValue('countCaloriesDinner', 'N/A'), 
         shower: getLocalStorageValue('shower', 'N/A'),
-        pwDaily: getLocalStorageValue('pwDaily', 'N/A')
+        pwDaily: getLocalStorageValue('pwDaily', 'N/A'),
+        haircut: getLocalStorageValue('haircut', 'N/A'),
+        stylingHair: getLocalStorageValue('stylingHair', 'N/A'),
+        brushTeethMorning: getLocalStorageValue('brushTeethMorning', 'N/A'),
+        brushTeethNight: getLocalStorageValue('brushTeethNight', 'N/A'),
+        drinkWater: getLocalStorageValue('drinkWater', 'N/A'),
+        noJunkFood: getLocalStorageValue('noJunkFood', 'N/A'),
+        workOut: getLocalStorageValue('workOut', 'N/A'),
+        physicalTherapy: getLocalStorageValue('physicalTherapy', 'N/A'),
+        laundry: getLocalStorageValue('laundry', 'N/A'),
+        tortugoCare: getLocalStorageValue('tortugoCare', 'N/A'),
+        filterChange: getLocalStorageValue('filterChange', 'N/A'),
+        floss: getLocalStorageValue('floss', 'N/A'),
+        crypto: getLocalStorageValue('crypto', 'N/A'),
+        cleanArea: getLocalStorageValue('cleanArea', 'N/A'),
+        roomba: getLocalStorageValue('roomba', 'N/A'),
+        medicineMorning: getLocalStorageValue('medicineMorning', 'N/A'),
+        medicineAfternoon: getLocalStorageValue('medicineAfternoon', 'N/A'),
+        medicineNight: getLocalStorageValue('medicineNight', 'N/A'),
+        trash: getLocalStorageValue('trash', 'N/A'),
+        pillowCover: getLocalStorageValue('pillowCover', 'N/A'),
+        cases: getLocalStorageValue('cases', 'N/A'),
+        textMom: getLocalStorageValue('textMom', 'N/A'),
+        textDad: getLocalStorageValue('textDad', 'N/A'),
+        tenCommits: getLocalStorageValue('tenCommits', 'N/A'),
+        cleanOffice: getLocalStorageValue('cleanOffice', 'N/A'),
+        niceGesture: getLocalStorageValue('niceGesture', 'N/A'),
+        charging: getLocalStorageValue('charging', 'N/A'),
+        homeImprovement: getLocalStorageValue('homeImprovement', 'N/A'),
+        ...Object.fromEntries(new Array(15).fill(null).map((_, i) => [
+            `pomodoro${i + 1}`, getLocalStorageValue(`pomodoro${i + 1}`, 'N/A')
+        ]))
     });
     // Data from Pantry saved to states below.
     // eslint-disable-next-line
