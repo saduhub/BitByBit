@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 // import './App.css';
 import RadioButtonGroup from './components/RadioButtonGroup';
-import efficiencyWindow from './components/efficiencyWindow';
+import EfficiencyWindow from './components/EfficiencyWindow';
 import { getLocalStorageValue, getHabitData, storeFormData, getTodayData, getPastData, getDate } from './helpers';
 import questions from './ask';
 
@@ -144,7 +144,7 @@ function App() {
                 <div>{renderPastData()}</div>
             </div>
           </div>
-          <efficiencyWindow/>
+          <EfficiencyWindow/>
       </div>
   );
 }

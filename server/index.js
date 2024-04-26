@@ -1,10 +1,14 @@
 const express = require('express');
 const fetch = require('node-fetch'); 
+const { OpenAI } = require('openai');
 const path = require("path");
 require("dotenv").config({ path: path.join(__dirname, "../.env") });
 // console.log('PANTRY_URL:', process.env.PANTRY_URL);
 const app = express();
 const PORT = process.env.PORT || 3000;
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+});
 // let responseBody;
 
 app.use(express.json());
@@ -25,7 +29,7 @@ app.get('/api', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
+// Add data to Pantry
 app.post('/api', async (req, res) => {
     try {
         const { body } = req;
@@ -61,6 +65,26 @@ app.post('/api', async (req, res) => {
         console.error("Error in /api:", error);
         // console.log(responseBody)
         res.status(500).json({ error: 'Internal Server Error', details: error.message });
+    }
+});
+// Analyze efficiency using Open AI API
+app.post('/openai', async (req, res) => {
+    const { prompt } = req.body;
+    const sentPrompt = [
+        {"role": "system", "content": "You are Mexican and you can understand English, but only respond in Spanish"},
+        {"role": "user", "content": `${prompt}`}
+    ];
+    try {
+        const completion = await openai.chat.completions.create({
+            model: "gpt-3.5-turbo-0125",
+            messages: sentPrompt,
+            max_tokens: 150
+        });
+        res.json(completion);
+        console.log(completion.choices[0].message.content);
+    } catch (error) {
+        console.error("Error calling OpenAI API:", error);
+        res.status(500).json({ error: error.message });
     }
 });
 

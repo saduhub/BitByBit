@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { queryOpenAI } from '../helpers';
 
-function efficiencyWindow() {
+function EfficiencyWindow() {
   const [prompt, setPrompt] = useState('');
   const [response, setResponse] = useState('');
 
@@ -28,4 +28,4 @@ function efficiencyWindow() {
   );
 }
 
-export default efficiencyWindow;
+export default EfficiencyWindow;
