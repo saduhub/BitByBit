@@ -80,7 +80,7 @@ app.post('/openai', async (req, res) => {
             messages: sentPrompt,
             max_tokens: 150
         });
-        res.json(completion);
+        res.json(completion.choices[0].message.content);
         console.log(completion.choices[0].message.content);
     } catch (error) {
         console.error("Error calling OpenAI API:", error);
