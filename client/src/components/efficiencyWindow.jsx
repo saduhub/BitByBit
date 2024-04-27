@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 import { useState } from 'react';
 import { queryOpenAI } from '../helpers';
 
@@ -17,13 +16,31 @@ function EfficiencyWindow() {
   };
 
   return (
-    <div>
-      <h1>OpenAI API Test</h1>
-      <form onSubmit={handleSubmit}>
-        <input type="text" value={prompt} onChange={handleInputChange} />
-        <button type="submit">Send</button>
-      </form>
-      <p>Response: {response}</p>
+    <div className="container mt-4">
+      <div className="row justify-content-center">
+        <div className="col-md-8">
+            <h1 className="text-center mb-3">OpenAI API Test</h1>
+            <form onSubmit={handleSubmit} className="mb-4">
+              <div className="form-group">
+                  <input 
+                      type="text" 
+                      className="form-control"
+                      value={prompt} 
+                      onChange={handleInputChange} 
+                      placeholder="Enter your prompt" 
+                  />
+              </div>
+              <div className="d-flex justify-content-center">
+                <button type="submit" className="btn btn-primary mt-3">Send</button>
+              </div>
+            </form>
+            <div className="card">
+              <div className="card-body">
+                  <p className="card-text">Response: {response}</p>
+              </div>
+            </div>
+          </div>
+      </div>
     </div>
   );
 }
