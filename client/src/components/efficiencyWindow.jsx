@@ -33,6 +33,15 @@ function EfficiencyWindow() {
               <div className="d-flex justify-content-center">
                 <button type="submit" className="btn btn-primary mt-3">Send</button>
               </div>
+              <div className="d-flex justify-content-center">
+                <button type="submit" className="btn btn-primary mt-3">Efficiancy - Day</button>
+              </div>
+              <div className="d-flex justify-content-center">
+                <button type="submit" className="btn btn-primary mt-3">Efficiancy - Week</button>
+              </div>
+              <div className="d-flex justify-content-center">
+                <button type="submit" className="btn btn-primary mt-3">Efficiancy - Month</button>
+              </div>
             </form>
             <div className="card">
               <div className="card-body">
