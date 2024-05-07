@@ -45,12 +45,34 @@ function App() {
             `pomodoro${i + 1}`, getLocalStorageValue(`pomodoro${i + 1}`, 'N/A')
         ]))
     });
+    // Reset entries every day.
+    useEffect(() => {
+        const resetChoicesDaily = () => {
+            const currentDate = getDate();
+            const storedDate = localStorage.getItem('storedDate');
+            if (!storedDate || storedDate !== currentDate) {
+                // Construct a new state with 'N/A' for all options.
+                const newResponses = {};
+                Object.keys(responses).forEach(key => {
+                    newResponses[key] = 'N/A';
+                });
+                // Update state of responsed to undo previous state set by user and store new access date.
+                setResponses(newResponses);
+                localStorage.setItem('storedDate', currentDate); 
+                // Also update localStorage for all items.
+                for (const key in newResponses) {
+                    localStorage.setItem(key, 'N/A');
+                }
+            }
+        };
+        resetChoicesDaily();
+    });
     // Data from Pantry saved to states below.
     // eslint-disable-next-line
     const [todayData, setTodayData] = useState({});
     const [pastData, setPastData] = useState({});
     // Determine date
-    const today = getDate()
+    const today = getDate();
     // Form persistence behavior - Update local storage when selecting another option.
     useEffect(() => {
         for (const key in responses) {
