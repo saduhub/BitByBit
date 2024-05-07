@@ -77,13 +77,19 @@ export const storeFormData = async (newResponses, today, pastData) => {
     }
 };
 
-export const queryOpenAI = async (prompt) => {
+export const queryOpenAI = async (prompt, pastData) => {
+
+    const bodyContent = {
+        prompt: prompt,
+        pastData: pastData 
+    };
+
     const response = await fetch('/openai', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt })
+        body: JSON.stringify(bodyContent)
     });
 
     if (response.ok) {

@@ -69,10 +69,11 @@ app.post('/api', async (req, res) => {
 });
 // Analyze efficiency using Open AI API
 app.post('/openai', async (req, res) => {
-    const { prompt } = req.body;
+    const { prompt, pastData } = req.body;
+    const formattedPrompt = `Analyze this data: ${JSON.stringify(pastData)} with respect to the user query: ${prompt}`;
     const sentPrompt = [
-        {"role": "system", "content": "You are Mexican and you can understand English, but only respond in Spanish"},
-        {"role": "user", "content": `${prompt}`}
+        {"role": "system", "content": "Analyze my daily habits data from all recorded dates and provide a detailed efficiency analysis as my life coach. Focus on my adherence to routine tasks and my productivity. For each task, calculate the completion percentage to illustrate my efficiency over time. Your responses should be concise, under 100 words, and include percentages for all tasks to help me visualize improvements and areas needing attention. Ensure your analysis covers all available data."},
+        {"role": "user", "content": formattedPrompt}
     ];
     try {
         const completion = await openai.chat.completions.create({

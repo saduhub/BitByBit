@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { queryOpenAI } from '../helpers';
 
-function EfficiencyWindow() {
+function EfficiencyWindow({ pastData }) {
   const [prompt, setPrompt] = useState('');
   const [date, setDate] = useState('');
   const [period, setPeriod] = useState('daily');
@@ -19,7 +19,7 @@ function EfficiencyWindow() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const result = await queryOpenAI(prompt);
+    const result = await queryOpenAI(prompt, pastData);
     setResponse(result);
   };
 

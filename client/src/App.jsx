@@ -166,7 +166,7 @@ function App() {
                 <div>{renderPastData()}</div>
             </div>
           </div>
-          <EfficiencyWindow/>
+          <EfficiencyWindow pastData={pastData}/>
       </div>
   );
 }
